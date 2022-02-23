@@ -1,0 +1,12 @@
+{% extends 'recipe/background.html' %}
+
+{% block block %}
+    <div class="post">
+       <h1><a href="">{{ recipe.food_name }}</a></h1>
+        <p>{{ recipe.ingredient|linebreaksbr }}</p>
+        <p>{{ recipe.recipe|linebreaksbr }}</p>
+        <div class="date">
+            <p>created : {{ recipe.created_date }}</p>
+        </div>
+    </div>
+{% endblock %}

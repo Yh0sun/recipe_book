@@ -4,7 +4,7 @@
     {% for recipe in recipes %}
         <div>
             <p>{{ recipe.author }}</p>
-            <h1><a href="">{{ recipe.food_name }}</a> </h1>
+            <h1><a href="{% url 'recipe_detail' pk=recipe.pk %}">{{ recipe.food_name }}</a> </h1>
             <div>
                 <p>created : {{ recipe.created_date }}</p>
             </div>
