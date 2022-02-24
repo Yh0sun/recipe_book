@@ -32,3 +32,17 @@ def recipe_new(request):
             form = RecipeForm()
         return render(request, 'recipe/recipe_edit.html', {'recipeForm': form})
 
+
+def recipe_edit(request, pk):
+    recipe = get_object_or_404(Recipe, pk=pk)
+    if request.method == 'POST':
+        form = RecipeForm(request.POST, instance=recipe)
+        if form.is_valid():
+            recipe = form.save(commit=False)
+            recipe.author = request.user
+            recipe.published_date = timezone.now()
+            recipe.save()
+            return redirect('recipe_edit', pk=recipe.pk)
+    else:
+        form = RecipeForm(instance=recipe)
+    return render(request, 'recipe/recipe_edit.html', {'recipeForm': form})
