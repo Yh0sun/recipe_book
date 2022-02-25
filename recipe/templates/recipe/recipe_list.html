@@ -2,12 +2,17 @@
 
 {% block block %}
     {% for recipe in recipes %}
-        <div>
+        <div class="post">
             <p>{{ recipe.author }}</p>
-            <h1><a href="{% url 'recipe_detail' pk=recipe.pk %}">{{ recipe.food_name }}</a> </h1>
+            <h1><b href="{% url 'recipe_detail' pk=recipe.pk %}">{{ recipe.food_name }}</b> </h1>
             <div>
                 <p>created : {{ recipe.created_date }}</p>
             </div>
+            <a href="{% url 'recipe_detail' pk=recipe.pk %}">Comments: {{ recipe.approved_comments.count }}</a>
         </div>
+    {% empty %}
+        <p>blog 글이 없습니다.</p>
     {% endfor %}
+
+    {% include 'recipe/pagination.html' with page=recipes%}
 {% endblock %}
